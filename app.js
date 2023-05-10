@@ -1,4 +1,5 @@
 const express = require('express')
+const cors = require('cors')
 
 // config
 const { serverConfig } = require('./config')
@@ -9,6 +10,7 @@ const compilerRouter = require('./routes/api/v1/compiler')
 
 const app = express()
 
+app.use(cors())
 
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
