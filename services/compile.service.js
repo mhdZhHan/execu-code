@@ -1,9 +1,12 @@
 const { generateFile } = require('../functions/generateFile')
 const { executeCpp } = require('../functions/executeCpp')
+const { executePython } = require('../functions/executePython')
 
 
 const compleCode = async (language, code) => {
     let response_data = {}
+
+    let output = undefined
 
     if(!code) {
         response_data = {
@@ -16,8 +19,12 @@ const compleCode = async (language, code) => {
         // generate the file with code
         const filePath = await generateFile(language, code)
 
-        // run the file and send the response
-        const output = await executeCpp(filePath)
+        // run the file and send the response 
+        if(language === 'cpp') {
+            output = await executeCpp(filePath)
+        }else if(language === 'python'){
+            output = await executePython(filePath)
+        }
 
         response_data = {
             status: true,
