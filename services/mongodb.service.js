@@ -4,17 +4,18 @@ const { mongoConfig } = require('../config')
 
 class MongoDb {
     static connectToMongoDb = async () => {
-        mongoose.connect('mongodb://127.0.0.1:27017/db_execu_code', {
+        const uri = `${mongoConfig.connectionUrl} ${mongoConfig.database_name}`
+
+        mongoose.connect(uri, {
             useNewUrlParser: true,
             useUnifiedTopology: true
         })
         .then(() => {
-            console.log('Connected to the database');
+            console.log('Connected to the database')
         })
         .catch((error) => {
-            console.error('Error connecting to the database:', error);
-        });
-
+            console.error('Error connecting to the database:', error)
+        })
     }
 }
 
