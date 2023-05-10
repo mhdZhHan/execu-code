@@ -8,6 +8,10 @@ const { serverConfig } = require('./config')
 const indexRouter = require('./routes/index')
 const compilerRouter = require('./routes/api/v1/compiler')
 
+// services
+const { MongoDb } = require('./services')
+MongoDb.connectToMongoDb() // db connection
+
 const app = express()
 
 app.use(cors())
