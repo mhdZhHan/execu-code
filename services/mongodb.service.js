@@ -18,6 +18,4 @@ class MongoDb {
     }
 }
 
-module.exports = {
-    MongoDb,
-}
+module.exports = MongoDb

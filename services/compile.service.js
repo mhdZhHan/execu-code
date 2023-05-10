@@ -2,7 +2,7 @@
 const { generateFile, executeCpp, executePython } = require('../functions')
 
 // models
-const { Code }  = require('../models')
+const { Task }  = require('../models')
 
 
 const compleCode = async (language, code) => {
@@ -10,7 +10,7 @@ const compleCode = async (language, code) => {
 
     let output = undefined
 
-    let codeDetails = undefined
+    let task = undefined
 
     if(!code) {
         response_data = {
@@ -24,36 +24,36 @@ const compleCode = async (language, code) => {
         const filePath = await generateFile(language, code)
         
         // create a new code details object based on the Code Model
-        codeDetails = await new Code({ language, filePath }).save()
-        const codeDetailsId = codeDetails['_id']
+        task = await new Task({ language, filePath }).save()
+        const taskId = task['_id']
 
         response_data = {
             status: true,
-            codeDetailsId,
+            taskId,
         }
 
         // run the file and send the response 
-        codeDetails['startedAt'] = new Date() // start execution
+        task['startedAt'] = new Date() // start execution
         if(language === 'cpp') {
             output = await executeCpp(filePath)
         }else if(language === 'python' || language === 'py'){
             output = await executePython(filePath)
         }
-        codeDetails['completedAt'] = new Date() // end execution
+        task['completedAt'] = new Date() // end execution
 
-        codeDetails['status'] = 'success'
-        codeDetails['output'] = output
+        task['status'] = 'success'
+        task['output'] = output
 
-        await codeDetails.save()
-        console.log(codeDetails)
+        await task.save()
+        console.log(task)
         
     } catch (error) {
-        codeDetails['completedAt'] = new Date() 
-        codeDetails['status'] = 'error'
-        codeDetails['output'] = JSON.stringify(error)
-        await codeDetails.save()
+        task['completedAt'] = new Date() 
+        task['status'] = 'error'
+        task['output'] = JSON.stringify(error)
+        await task.save()
 
-        console.log(codeDetails)
+        console.log(task)
 
         response_data = {
             status: false,
@@ -64,6 +64,4 @@ const compleCode = async (language, code) => {
     return response_data
 }
 
-module.exports = {
-    compleCode,
-}
+module.exports = compleCode

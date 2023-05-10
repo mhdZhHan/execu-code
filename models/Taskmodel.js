@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 
-const CodeSchema = mongoose.Schema({
+const TaskSchema = mongoose.Schema({
     language: {
         type: String,
         required: true,
@@ -31,4 +31,4 @@ const CodeSchema = mongoose.Schema({
 })
 
 // default export
-module.exports = mongoose.model("Code", CodeSchema)
+module.exports = mongoose.model("Task", TaskSchema)
