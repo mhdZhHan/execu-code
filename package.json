@@ -19,6 +19,6 @@
   },
   "projectConfig": {
     "serverIp": "localhost",
-    "serverPort": 3000
+    "serverPort": 9000
   }
 }
