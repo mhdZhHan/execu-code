@@ -22,7 +22,7 @@ const compleCode = async (language, code) => {
         // run the file and send the response 
         if(language === 'cpp') {
             output = await executeCpp(filePath)
-        }else if(language === 'python'){
+        }else if(language === 'python' || language === 'py'){
             output = await executePython(filePath)
         }
 
