@@ -2,7 +2,7 @@
 const { generateFile, executeCpp, executePython } = require('../functions')
 
 // models
-const Code  = require('../models/Codemodel')
+const { Code }  = require('../models')
 
 
 const compleCode = async (language, code) => {
