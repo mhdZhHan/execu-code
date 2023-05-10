@@ -4,8 +4,7 @@ const { mongoConfig } = require('../config')
 
 class MongoDb {
     static connectToMongoDb = async () => {
-        const uri = `${mongoConfig.connectionUrl} ${mongoConfig.database_name}`
-
+        const uri = `${mongoConfig.connectionUrl}${mongoConfig.database_name}`
         mongoose.connect(uri, {
             useNewUrlParser: true,
             useUnifiedTopology: true
