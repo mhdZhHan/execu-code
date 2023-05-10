@@ -21,10 +21,10 @@ const executeCpp = (filePath) => {
     return new Promise((resolve, reject)=> {
         exec(
             `g++ ${filePath} -o ${outPath} && cd ${outputPath} && ./${fileName}`,
-            (error, stdOut, stdError) => {
-                error && reject({error, stdError})
-                stdError && reject(stdError)
-                resolve(stdOut)
+            (error, codeOut, codeError) => {
+                error && reject({error, codeError})
+                codeError && reject(codeError)
+                resolve(codeOut)
             }
         )
     })
