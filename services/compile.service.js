@@ -1,6 +1,4 @@
-const { generateFile } = require('../functions/generateFile')
-const { executeCpp } = require('../functions/executeCpp')
-const { executePython } = require('../functions/executePython')
+const { generateFile, executeCpp, executePython } = require('../functions')
 
 
 const compleCode = async (language, code) => {
