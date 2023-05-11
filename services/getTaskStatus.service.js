@@ -19,10 +19,11 @@ const getTaskStatus = async (taskId) => {
                 status: false,
                 message: 'Task not found'
             }
-        }
-        response_data = {
-            status: true,
-            task: task,
+        }else {
+            response_data = {
+                status: true,
+                task: task,
+            }
         }
     } catch (error) {
         response_data = {

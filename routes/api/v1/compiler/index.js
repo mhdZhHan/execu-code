@@ -13,7 +13,7 @@ router.post('/run', async (req, res)=> {
 })
 
 
-router.get('/status', async (req, res)=> {
+router.get('/task/status', async (req, res)=> {
     const taskId = req.query.id
     const response = await getTaskStatus(taskId)
 
