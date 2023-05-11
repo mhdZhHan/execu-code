@@ -13,6 +13,4 @@ const executePython = (filePath) => {
     })
 }
 
-module.exports = {
-    executePython
-}
+module.exports = executePython

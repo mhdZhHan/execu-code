@@ -30,6 +30,4 @@ const executeCpp = (filePath) => {
     })
 }
 
-module.exports = {
-    executeCpp,
-}
+module.exports = executeCpp

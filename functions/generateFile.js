@@ -21,6 +21,4 @@ const generateFile = async (extension, code) => {
     return filePath
 }
 
-module.exports = {
-    generateFile,
-}
+module.exports = generateFile
