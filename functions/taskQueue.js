@@ -38,10 +38,10 @@ taskQueue.process(NUM_WORKERS, async ({data})=> {
 
         await task.save()
         return true
-    } catch (error) {
-        console.log(error)
+    } catch (error) { // Promise rejection
+        console.log("Error: ",error)
         task['completedAt'] = new Date() 
-        task['output'] = JSON.stringify(error)
+        task['error'] = JSON.stringify(error.codeError)
         task['status'] = 'error'
 
         await task.save()

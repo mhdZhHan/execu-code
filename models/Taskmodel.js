@@ -28,6 +28,9 @@ const TaskSchema = mongoose.Schema({
     output: {
         type: String,
     },
+    error: {
+        type: String,
+    },
 })
 
 // default export
