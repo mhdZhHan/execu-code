@@ -1,5 +1,5 @@
 // functions
-const { generateFile, executeCpp, executePython } = require('../functions')
+const { generateFile, addTaskToQueue } = require('../functions')
 
 // models
 const { Task }  = require('../models')
@@ -7,9 +7,6 @@ const { Task }  = require('../models')
 
 const compleCode = async (language, code) => {
     let response_data = {}
-
-    let output = undefined
-
     let task = undefined
 
     if(!code) {
@@ -27,37 +24,17 @@ const compleCode = async (language, code) => {
         task = await new Task({ language, filePath }).save()
         const taskId = task['_id']
 
+        addTaskToQueue(taskId)
+
         response_data = {
             status: true,
             taskId,
         }
-
-        // run the file and send the response 
-        task['startedAt'] = new Date() // start execution
-        if(language === 'cpp') {
-            output = await executeCpp(filePath)
-        }else if(language === 'python' || language === 'py'){
-            output = await executePython(filePath)
-        }
-        task['completedAt'] = new Date() // end execution
-
-        task['status'] = 'success'
-        task['output'] = output
-
-        await task.save()
-        console.log(task)
         
     } catch (error) {
-        task['completedAt'] = new Date() 
-        task['status'] = 'error'
-        task['output'] = JSON.stringify(error)
-        await task.save()
-
-        console.log(task)
-
         response_data = {
             status: false,
-            error: error,
+            error: JSON.stringify(error)
         }
     }
 
